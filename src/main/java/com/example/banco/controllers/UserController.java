@@ -26,4 +26,11 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
+
+    @PostMapping("/debit")
+    public ResponseEntity<User> debitUser(@RequestBody User user){
+        var debitedUser = userService.debitUser(user.getNumUser(),user.getSaldo());
+        return ResponseEntity.ok(debitedUser);
+    }
+
 }

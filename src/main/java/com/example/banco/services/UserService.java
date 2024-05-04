@@ -21,4 +21,10 @@ public class UserService {
     public User getUserByNumUser(String num_user) {
         return userRepository.findByNumUser(num_user);
     }
+
+    public User debitUser(String num_user, Double value) {
+        var user = userRepository.findByNumUser(num_user);
+        user.setSaldo(user.getSaldo()-value);
+        return userRepository.save(user);
+    }
 }
