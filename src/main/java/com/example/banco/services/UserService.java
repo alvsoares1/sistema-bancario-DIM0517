@@ -29,4 +29,10 @@ public class UserService {
     }
 
 
+
+    public User creditar(String num_user, Double value) {
+        var user = userRepository.findByNumUser(num_user);
+        user.setSaldo(user.getSaldo()+value);
+        return userRepository.save(user);
+    }
 }
