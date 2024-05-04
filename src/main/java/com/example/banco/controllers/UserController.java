@@ -26,4 +26,10 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
+
+    @PostMapping("/credit")
+    public ResponseEntity<User> creditUser(@RequestBody User user){
+        User registeredUser = userService.creditar(user.getNumUser(), user.getSaldo());
+        return ResponseEntity.ok(registeredUser);
+    }
 }
