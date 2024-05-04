@@ -38,4 +38,10 @@ public class UserController {
         User registeredUser = userService.creditar(user.getNumUser(), user.getSaldo());
         return ResponseEntity.ok(registeredUser);
     }
+
+    @PostMapping("/transfer/{num_user_origin}/{num_user_destiny}")
+    public ResponseEntity<User> transfer(@PathVariable String num_user_origin, @PathVariable String num_user_destiny, @RequestBody Double value) {
+        User origin_user = userService.transfer(num_user_origin, num_user_destiny, value);
+        return ResponseEntity.ok(origin_user);
+    }
 }
