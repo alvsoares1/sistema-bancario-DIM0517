@@ -33,4 +33,11 @@ public class UserService {
         user.setSaldo(user.getSaldo()+value);
         return userRepository.save(user);
     }
+
+    public User transfer(String num_user_origin, String num_user_destiny, Double value) {
+        var user_origin = debitUser(num_user_origin, value);
+        var user_destiny = creditar(num_user_destiny, value);
+
+        return user_origin;
+    }
 }
