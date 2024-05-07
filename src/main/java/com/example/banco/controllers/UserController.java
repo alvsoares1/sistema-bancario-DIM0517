@@ -35,7 +35,7 @@ public class UserController {
 
     @PostMapping("/credit")
     public ResponseEntity<User> creditUser(@RequestBody User user){
-        User registeredUser = userService.creditar(user.getNumUser(), user.getSaldo());
+        User registeredUser = userService.creditUser(user.getNumUser(), user.getSaldo());
         return ResponseEntity.ok(registeredUser);
     }
 

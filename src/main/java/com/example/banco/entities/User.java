@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String numUser;
-    private double  saldo;
+    private double saldo;
 
     @JsonIgnore
     public String getId() {
