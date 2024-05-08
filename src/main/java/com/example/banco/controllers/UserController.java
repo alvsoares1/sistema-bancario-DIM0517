@@ -18,7 +18,7 @@ public class UserController {
         return ResponseEntity.ok(registeredUser);
     }
 
-    @GetMapping("/{numUser}")''
+    @GetMapping("/{numUser}")
     public ResponseEntity<User> getUserByNumUser(@PathVariable String numUser) {
         User user = userService.getUserByNumUser(numUser);
         if (user == null) {
