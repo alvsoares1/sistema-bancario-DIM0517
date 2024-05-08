@@ -14,7 +14,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user){
-        User registeredUser = userService.registerUser(user.getNumUser());
+        User registeredUser = userService.registerUser(user.getNumUser(), user.getType());
         return ResponseEntity.ok(registeredUser);
     }
 
@@ -44,4 +44,5 @@ public class UserController {
         User origin_user = userService.transfer(num_user_origin, num_user_destiny, value);
         return ResponseEntity.ok(origin_user);
     }
+
 }
