@@ -11,7 +11,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User registerUser(String numUser){
+    public User registerUser(String numUser) {
         User user = new User();
         user.setNumUser(numUser);
         user.setSaldo(0);
