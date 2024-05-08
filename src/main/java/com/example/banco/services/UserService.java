@@ -25,19 +25,16 @@ public class UserService {
 
     public User debitUser(String num_user, Double value) throws InsufficientFundsException {
         var user = userRepository.findByNumUser(num_user);
-        if(user.getSaldo() < value){
+        if (user.getSaldo() < value) {
             throw new InsufficientFundsException();
         }
-        user.setSaldo(user.getSaldo()-value);
+        user.setSaldo(user.getSaldo() - value);
         return userRepository.save(user);
     }
 
-
-    public User creditar(String num_user, Double value) {
-
     public User creditUser(String num_user, Double value) {
         var user = userRepository.findByNumUser(num_user);
-        user.setSaldo(user.getSaldo()+value);
+        user.setSaldo(user.getSaldo() + value);
         return userRepository.save(user);
     }
 
@@ -47,4 +44,5 @@ public class UserService {
 
         return user_origin;
     }
+
 }
