@@ -12,10 +12,15 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User registerUser(String numUser) {
+    public User registerUser(String numUser, int type) {
         User user = new User();
         user.setNumUser(numUser);
         user.setSaldo(0);
+        if(type == 2){
+            user.setPontos(10);
+        }
+        user.setType(type);
+
         return userRepository.save(user);
     }
 
@@ -29,12 +34,20 @@ public class UserService {
             throw new InsufficientFundsException();
         }
         user.setSaldo(user.getSaldo() - value);
+        if (user.getType() == 2) {
+            int pontos = (int) (value / 100);
+            user.setPontos(user.getPontos() + pontos);
+        }
         return userRepository.save(user);
     }
 
     public User creditUser(String num_user, Double value) {
         var user = userRepository.findByNumUser(num_user);
         user.setSaldo(user.getSaldo() + value);
+        if (user.getType() == 2) {
+            int pontos = (int) (value / 100);
+            user.setPontos(user.getPontos() + pontos);
+        }
         return userRepository.save(user);
     }
 

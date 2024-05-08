@@ -14,11 +14,11 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user){
-        User registeredUser = userService.registerUser(user.getNumUser());
+        User registeredUser = userService.registerUser(user.getNumUser(), user.getType());
         return ResponseEntity.ok(registeredUser);
     }
 
-    @GetMapping("/{numUser}")
+    @GetMapping("/{numUser}")''
     public ResponseEntity<User> getUserByNumUser(@PathVariable String numUser) {
         User user = userService.getUserByNumUser(numUser);
         if (user == null) {
