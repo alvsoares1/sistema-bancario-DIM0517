@@ -45,4 +45,9 @@ public class UserController {
         return ResponseEntity.ok(origin_user);
     }
 
+    @PostMapping("/yieldInterest/{interestRate}")
+    public ResponseEntity<String> yieldInterest(@RequestBody Double interestRate){
+        userService.yieldInterest(interestRate);
+        return ResponseEntity.ok("successfully.");
+    }
 }
