@@ -6,6 +6,7 @@ import com.example.banco.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 @Service
 public class UserService {
@@ -58,4 +59,13 @@ public class UserService {
         return user_origin;
     }
 
+    public void yieldInterest(Double interestRate){
+        List<User> userList = userRepository.findAll();
+        for(User user : userList){
+            if(user.getType() == 3){
+                double yield = (interestRate/100)* user.getSaldo();
+                user = creditUser(user.getId(), yield);
+            }
+        }
+    }
 }
