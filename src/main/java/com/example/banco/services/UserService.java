@@ -2,6 +2,7 @@ package com.example.banco.services;
 
 import com.example.banco.entities.User;
 import com.example.banco.exception.InsufficientFundsException;
+import com.example.banco.exception.MinFundsExceededException;
 import com.example.banco.exception.NegativeValueException;
 import com.example.banco.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +33,23 @@ public class UserService {
 
     public User debitUser(String num_user, Double value) {
         var user = userRepository.findByNumUser(num_user);
-        if (user.getSaldo() < value) {
-            throw new InsufficientFundsException();
-        }
+        validateFunds(value, user);
         user.setSaldo(user.getSaldo() - value);
         if (user.getType() == 2) {
             int pontos = (int) (value / 100);
             user.setPontos(user.getPontos() + pontos);
         }
         return userRepository.save(user);
+    }
+
+    private static void validateFunds(Double value, User user) {
+        if(user != null && user.getType() <3){
+            if(user.getSaldo() < value-1000)
+                throw new MinFundsExceededException();
+        }
+        else if (user.getSaldo() < value) {
+            throw new InsufficientFundsException();
+        }
     }
 
     public User creditUser(String num_user, Double value) {
