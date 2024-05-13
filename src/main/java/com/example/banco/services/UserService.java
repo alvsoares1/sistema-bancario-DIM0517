@@ -57,6 +57,11 @@ public class UserService {
     public User transfer(String num_user_origin, String num_user_destiny, Double value) {
         var user_origin = debitUser(num_user_origin, value);
         var user_destiny = creditUser(num_user_destiny, value);
+        if(user_destiny.getType() == 2){
+            int pontos_remover = (int) (value / 100);
+            int pontos = (int) (value / 150);
+            user_destiny.setPontos(user_destiny.getPontos()  -pontos_remover + pontos);
+        }
 
         return user_origin;
     }
