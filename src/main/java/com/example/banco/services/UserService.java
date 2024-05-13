@@ -15,12 +15,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User registerUser(String numUser, int type) {
+    public User registerUser(String numUser, int type, double saldoInicial) {
+
         User user = new User();
         user.setNumUser(numUser);
-        user.setSaldo(0);
         if(type == 2){
             user.setPontos(10);
+        }
+        if(type == 3){
+            user.setSaldo(saldoInicial);
+        }else{
+            user.setSaldo(0);
         }
         user.setType(type);
 
@@ -50,16 +55,19 @@ public class UserService {
         else if (user.getSaldo() < value) {
             throw new InsufficientFundsException();
         }
+
     }
 
     public User creditUser(String num_user, Double value) {
         checkNegativeValue(value);
         var user = userRepository.findByNumUser(num_user);
         user.setSaldo(user.getSaldo() + value);
+
         if (user.getType() == 2) {
             int pontos = (int) (value / 100);
             user.setPontos(user.getPontos() + pontos);
         }
+
         return userRepository.save(user);
     }
 
