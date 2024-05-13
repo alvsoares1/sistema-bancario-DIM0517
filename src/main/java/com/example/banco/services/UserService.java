@@ -78,7 +78,6 @@ public class UserService {
         return user_origin;
     }
 
-
     public void yieldInterest(Double interestRate){
         List<User> userList = userRepository.findAll();
         for(User user : userList){
@@ -94,5 +93,4 @@ public class UserService {
             throw new NegativeValueException();
         }
     }
-
 }

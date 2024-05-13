@@ -50,5 +50,4 @@ public class UserController {
         userService.yieldInterest(interestRate);
         return ResponseEntity.ok("successfully.");
     }
-
 }
