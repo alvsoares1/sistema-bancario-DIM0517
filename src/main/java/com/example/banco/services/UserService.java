@@ -22,7 +22,7 @@ public class UserService {
             user.setPontos(10);
         }
         user.setType(type);
-
+      
         return userRepository.save(user);
     }
 
