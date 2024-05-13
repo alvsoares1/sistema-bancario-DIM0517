@@ -20,6 +20,13 @@ public class User {
     private String id;
     private String numUser;
     private double saldo;
+    private int pontos;
+    /*
+       1 = Normal
+       2 = Bonificada
+       3 = Poupança
+     */
+    private int type;
 
     @JsonIgnore
     public String getId() {
