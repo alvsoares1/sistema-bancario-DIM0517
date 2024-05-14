@@ -20,6 +20,8 @@ public class User {
     private String id;
     private String numUser;
     private double saldo;
+    private int pontos;
+    private int type;
 
     @JsonIgnore
     public String getId() {
