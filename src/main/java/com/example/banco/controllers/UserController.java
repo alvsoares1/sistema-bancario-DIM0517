@@ -60,11 +60,11 @@ public class UserController {
      */
     @GetMapping("/{numUser}/saldo")
     public ResponseEntity<Double> getUserSaldoByNumUser(@PathVariable String numUser) {
-        User user = userService.getUserByNumUser(numUser);
-        if (user == null) {
+        var value = userService.getSaldoByNumUser(numUser);
+        if (value == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(user.getSaldo());
+        return ResponseEntity.ok(value);
     }
 
     /**

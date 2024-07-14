@@ -41,7 +41,16 @@ public class UserService {
         return userRepository.findByNumUser(num_user);
     }
 
+    public Double getSaldoByNumUser(String num_user) {
+        var user = userRepository.findByNumUser(num_user);
+        if(user == null){
+            return null;
+        }
+        return user.getSaldo();
+    }
+
     public User debitUser(String num_user, Double value) {
+        checkNegativeValue(value);
         var user = userRepository.findByNumUser(num_user);
         validateFunds(value, user);
         user.setSaldo(user.getSaldo() - value);
