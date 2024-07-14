@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -30,6 +31,10 @@ public class UserService {
         user.setType(type);
 
         return userRepository.save(user);
+    }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 
     public User getUserByNumUser(String num_user) {
@@ -79,11 +84,14 @@ public class UserService {
     }
 
     public void yieldInterest(Double interestRate){
+        if(Objects.isNull(interestRate) || interestRate < 0){
+            interestRate = 1.01;
+        }
         List<User> userList = userRepository.findAll();
         for(User user : userList){
             if(user.getType() == 3){
                 double yield = (interestRate/100)* user.getSaldo();
-                user = creditUser(user.getId(), yield);
+                user = creditUser(user.getNumUser(), yield);
             }
         }
     }
