@@ -29,12 +29,9 @@ jobs:
       - name: Compile
         run: mvn clean compile
 
-      - name: Super-Linter
-        uses: github/super-linter@v6
-        env:
-            VALIDATE_ALL_CODEBASE: false
-            DEFAULT_BRANCH: develop
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: axel-op/googlejavaformat-action@v3
+        with:
+          args: "--skip-sorting-imports --replace"
 
       - name: Test
         run: mvn test
