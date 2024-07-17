@@ -35,6 +35,5 @@ jobs:
       - name: Criar tag
         id: tag
         run: |
-          TIMESTAMP=$(date +'%Y%m%d%H%M%S')
-          git tag build-$TIMESTAMP
-          git push origin build-$TIMESTAMP
+          git tag build-$(date +'%Y%m%d%H%M')
+          git push origin build-$(date +'%Y%m%d%H%M')
