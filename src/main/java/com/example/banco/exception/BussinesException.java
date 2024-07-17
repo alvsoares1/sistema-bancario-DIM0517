@@ -1,8 +1,8 @@
 package com.example.banco.exception;
 
-public class BussinesException extends RuntimeException{
+public class BussinesException extends RuntimeException {
 
-    public BussinesException(String s) {
-        super(s);
-    }
+  public BussinesException(String s) {
+    super(s);
+  }
 }
