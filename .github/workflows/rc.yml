@@ -1,16 +1,11 @@
-name: CI - resolve dependencias (testes)
-
+name: CI - release candidate
 on:
   push:
-    branches:
-      - develop
-  pull_request:
-    branches:
-      - develop
-    types: [closed]
+    tags:
+      - 'rc-*.*'
+
 jobs:
   build:
-    if: github.event.pull_request.merged == true || github.event_name == 'push'
     runs-on: ubuntu-latest
 
     steps:
@@ -34,11 +29,12 @@ jobs:
       - name: Compile
         run: mvn clean compile
 
+      - name: Super-Linter
+        uses: github/super-linter@v6
+        env:
+            VALIDATE_ALL_CODEBASE: false
+            DEFAULT_BRANCH: develop
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Test
         run: mvn test
-
-      - name: Criar tag
-        id: tag
-        run: |
-          git tag build-$(date +'%Y%m%d%H%M')
-          git push origin build-$(date +'%Y%m%d%H%M')
