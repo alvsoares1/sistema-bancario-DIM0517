@@ -39,6 +39,8 @@ jobs:
 
       - name: Criar tag
         id: tag
+        env:
+          TOKEN: ${{ secrets.ACTIONS_DEPLOY_TOKEN }}
         run: |
           git tag build-$(date +'%Y%m%d%H%M%S')
           git push origin build-$(date +'%Y%m%d%H%M%S')
