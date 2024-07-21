@@ -3,7 +3,7 @@ name: CI - resolve dependencias (testes)
 on:
   push:
     branches:
-      - develop
+      - master
 jobs:
   pre-fill:
     if: ${{ vars.version  == 0 && vars.subversion == 0 }}
