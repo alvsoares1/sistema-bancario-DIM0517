@@ -3,7 +3,7 @@ name: CI - resolve dependencias (testes)
 on:
   push:
     branches:
-      - develop
+      - develop2
 jobs:
   build:
     runs-on: ubuntu-latest
