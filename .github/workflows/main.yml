@@ -50,7 +50,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{ vars.DOCKER_USERNAME}}/banco:latest
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/banco:latest
+          context: .
+          file: .github/workflows/Dockerfile
 
       - name: Criar tag
         id: tag
