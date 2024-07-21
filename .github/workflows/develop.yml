@@ -1,0 +1,41 @@
+name: CI - resolve dependencias (testes)
+
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Cache Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Compile
+        run: mvn clean compile
+
+      - name: Test
+        run: mvn test
+
+      - name: Criar tag
+        id: tag
+        env:
+          TOKEN: ${{ secrets.ACTIONS_DEPLOY_TOKEN }}
+        run: |
+          git tag build-$(date +'%Y%m%d%H%M%S')
+          git push origin build-$(date +'%Y%m%d%H%M%S')
