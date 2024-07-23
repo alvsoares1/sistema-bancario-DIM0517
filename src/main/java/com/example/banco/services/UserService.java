@@ -60,10 +60,16 @@ public class UserService {
   }
 
   private static void validateFunds(Double value, User user) {
-    if (user != null && user.getType() < 3) {
-      if (user.getSaldo() < value - 1000) throw new MinFundsExceededException();
-    } else if (user.getSaldo() < value) {
-      throw new InsufficientFundsException();
+    if (user != null) {
+      if (user.getType() == 2) {
+        if (user.getSaldo() - value < -2000) {
+          throw new InsufficientFundsException();
+        }
+      } else if (user.getType() < 3) {
+        if (user.getSaldo() < value - 1000) throw new MinFundsExceededException();
+      } else if (user.getSaldo() < value) {
+        throw new InsufficientFundsException();
+      }
     }
   }
 
