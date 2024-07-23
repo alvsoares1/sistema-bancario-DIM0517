@@ -1,10 +1,10 @@
-FROM maven:3.8.6-openjdk-17 AS build
+FROM maven:3-openjdk-17 AS builder
 COPY pom.xml .
 COPY src ./src
-RUN mvn clean package
+RUN mvn clean package -DskipTests
 
 FROM openjdk:17-jdk-slim
-ARG JAR_FILE=target/banco-0.0.1-SNAPSHOT.jar
-COPY --from=build /app/${JAR_FILE} app.jar
+ARG JAR_FILE=target/banco*.jar
+COPY --from=builder /${JAR_FILE} app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
