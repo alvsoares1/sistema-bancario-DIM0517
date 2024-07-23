@@ -70,7 +70,7 @@ public class UserService {
   public User creditUser(String num_user, Double value) {
     checkNegativeValue(value);
     var user = userRepository.findByNumUser(num_user);
-    user.setSaldo(user.getSaldo() + value);
+//    user.setSaldo(user.getSaldo() + value);
 
     if (user.getType() == 2) {
       int pontos = (int) (value / 100);
